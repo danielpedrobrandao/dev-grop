@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Group | Projeto Portfólio Joinville</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Gerais */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #000; color: #fff; line-height: 1.6; overflow-x: hidden; }
+        
+        /* Container */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- ANIMAÇÃO DE SURGIMENTO --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* ------------------------------ */
+
+        /* Header */
+        header { padding: 20px 0; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 60px; }
+
+        /* Hero Section */
+        .hero { padding: 100px 0; text-align: center; }
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .hero h1 span { color: #28a745; }
+        .hero p { font-size: 1.2rem; color: #ccc; margin-bottom: 40px; max-width: 800px; margin-inline: auto; }
+
+        /* Botão Principal com Efeito de Energia */
+        .btn { 
+            background-color: #28a745; 
+            color: #fff; 
+            padding: 15px 40px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            border-radius: 5px; 
+            font-size: 1.1rem; 
+            transition: 0.3s; 
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn::before, .btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 2px solid #28a745;
+            border-radius: 5px;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        .btn:hover { 
+            background-color: #218838; 
+            transform: scale(1.05); 
+            box-shadow: 0 0 25px rgba(40, 167, 69, 0.6);
+        }
+
+        .btn:hover::before { animation: energia-outer 0.8s infinite; }
+        .btn:hover::after { animation: energia-inner 0.8s infinite 0.2s; }
+
+        @keyframes energia-outer {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.5, 2.2); opacity: 0; }
+        }
+
+        @keyframes energia-inner {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.3, 1.8); opacity: 0; }
+        }
+
+        /* Seção Sobre o Projeto */
+        .projeto { background-color: #111; padding: 80px 0; }
+        .projeto h2 { text-align: center; margin-bottom: 40px; font-size: 2rem; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .card { background: #222; padding: 30px; border-radius: 10px; border-top: 4px solid #28a745; }
+        .card h3 { margin-bottom: 15px; color: #28a745; }
+
+        /* --- SEÇÃO DE PORTFÓLIO INTERATIVO --- */
+        .portfolio-interativo { padding: 80px 0; background: #000; }
+        .portfolio-interativo h2 { text-align: center; margin-bottom: 40px; font-size: 2rem; }
+        .grid-frames { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .window-frame { 
+            background: #222; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            border: 1px solid #333; 
+            height: 400px;
+            position: relative;
+        }
+        .window-header { 
+            background: #333; 
+            padding: 10px; 
+            display: flex; 
+            gap: 5px; 
+            align-items: center; 
+        }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background: #ff5f56; }
+        .dot:nth-child(2) { background: #ffbd2e; }
+        .dot:nth-child(3) { background: #27c93f; }
+        .window-frame iframe { width: 100%; height: calc(100% - 35px); border: none; background: #fff; }
+
+        /* Contador de Vagas */
+        .vagas { padding: 60px 0; text-align: center; background-color: #000; border: 2px dashed #444; margin: 40px 0; border-radius: 15px; }
+        .vagas h2 { font-size: 2.5rem; color: #ffc107; }
+
+        /* Footer */
+        footer { padding: 40px 0; text-align: center; border-top: 1px solid #333; color: #666; font-size: 0.9rem; }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .btn { width: 100%; text-align: center; }
+            .grid-frames { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="reveal">
+        <div class="container">
+            <div class="logo">
+                <img src="logo.jpg" alt="Dev Group Logo">
+            </div>
+        </div>
+    </header>
+
+    <section class="hero reveal">
+        <div class="container">
+            <h1>Sua Loja no Google por apenas <span>R$ 300,00</span></h1>
+            <p>A <strong>Dev Group</strong> está selecionando 30 empresas de Joinville para o Projeto Portfólio 2026. Tenha uma Landing Page profissional feita com código de alta performance.</p>
+            <a href="https://wa.me/5547991152416?text=Olá Daniel, quero garantir minha vaga no Projeto 300 da Dev Group" target="_blank" class="btn">QUERO MINHA VAGA NO PROJETO</a>
+        </div>
+    </section>
+
+    <section class="projeto">
+        <div class="container">
+            <h2 class="reveal">O que está incluso no pacote?</h2>
+            <div class="cards">
+                <div class="card reveal">
+                    <h3>Design Exclusivo</h3>
+                    <p>Nada de sites iguais. Criamos uma estrutura que passa confiança e profissionalismo.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>Código Puro</h3>
+                    <p>Site feito em HTML, CSS e JS. Muito mais rápido e seguro que plataformas comuns.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>Foco em Vendas</h3>
+                    <p>Botão de WhatsApp em destaque e vitrine de serviços para converter curiosos em clientes.</p>
+                </div>
+                <div class="card reveal">
+                    <h3>Google Maps</h3>
+                    <p>Integração total para que seu cliente te ache facilmente aqui em Joinville.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio-interativo container">
+        <h2 class="reveal">Exemplares do Projeto 300</h2>
+        <div class="grid-frames">
+            
+            <div class="window-frame reveal">
+                <div class="window-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                <iframe src="https://danielpedrobrandao.github.io/expertcell/"></iframe>
+            </div>
+
+            <div class="window-frame reveal">
+                <div class="window-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                <iframe src="https://danielpedrobrandao.github.io/expertcell-/"></iframe>
+            </div>
+
+            <div class="window-frame reveal">
+                <div class="window-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                <iframe src="https://danielpedrobrandao.github.io/chats.AI-pages/"></iframe>
+            </div>
+
+            <div class="window-frame reveal">
+                <div class="window-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                <iframe src="https://danielpedrobrandao.github.io/expert-ia-/"></iframe>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="container reveal">
+        <div class="vagas">
+            <h2>RESTANDO APENAS: 27 VAGAS</h2>
+            <p>Após as 30 vagas preenchidas, o valor retornará ao preço normal de R$ 1.200,00.</p>
+        </div>
+    </div>
+
+    <footer class="reveal">
+        <div class="container">
+            <p>DEV GROUP - Soluções Digitais Estruturadas</p>
+            <p>Joinville - Santa Catarina | 2026</p>
+            <p>Desenvolvido com código de verdade.</p>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+
+</body>
+</html>
