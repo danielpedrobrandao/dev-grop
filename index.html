@@ -27,8 +27,26 @@
         /* ------------------------------ */
 
         /* Header */
-        header { padding: 20px 0; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
-        .logo img { height: 60px; }
+        header { padding: 20px 0; border-bottom: 1px solid #333; display: flex; justify-content: center; align-items: center; }
+        
+        /* Logo Escrita (Dev Group) */
+        .logo-escrita {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-simbolo {
+            color: #28a745;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 2rem;
+        }
 
         /* Hero Section */
         .hero { padding: 100px 0; text-align: center; }
@@ -81,11 +99,28 @@
         }
 
         /* Seção Sobre o Projeto */
-        .projeto { background-color: #111; padding: 80px 0; }
-        .projeto h2 { text-align: center; margin-bottom: 40px; font-size: 2rem; }
-        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .card { background: #222; padding: 30px; border-radius: 10px; border-top: 4px solid #28a745; }
+        .projeto { background-color: #111; padding: 80px 0; position: relative; overflow: hidden; }
+        .projeto h2 { text-align: center; margin-bottom: 40px; font-size: 2rem; position: relative; z-index: 2; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; position: relative; z-index: 2; }
+        .card { background: rgba(34, 34, 34, 0.95); padding: 30px; border-radius: 10px; border-top: 4px solid #28a745; backdrop-filter: blur(5px); }
         .card h3 { margin-bottom: 15px; color: #28a745; }
+
+        /* ESTILO DA CHUVA DE CIFRÕES/GOOGLE */
+        .chuva-item {
+            position: absolute;
+            top: -50px;
+            color: rgba(40, 167, 69, 0.5);
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 1;
+            animation: queda linear infinite;
+        }
+        @keyframes queda {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(800px) rotate(360deg); opacity: 0; }
+        }
 
         /* --- SEÇÃO DE PORTFÓLIO INTERATIVO --- */
         .portfolio-interativo { padding: 80px 0; background: #000; }
@@ -130,8 +165,9 @@
 
     <header class="reveal">
         <div class="container">
-            <div class="logo">
-                <img src="logo.jpg" alt="Dev Group Logo">
+            <div class="logo-escrita">
+                <span class="logo-simbolo">&lt;/&gt;</span>
+                <span>Dev Group</span>
             </div>
         </div>
     </header>
@@ -144,7 +180,7 @@
         </div>
     </section>
 
-    <section class="projeto">
+    <section class="projeto" id="section-chuva">
         <div class="container">
             <h2 class="reveal">O que está incluso no pacote?</h2>
             <div class="cards">
@@ -211,6 +247,7 @@
     </footer>
 
     <script>
+        // Observador original
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -220,6 +257,27 @@
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // LÓGICA DA CHUVA (CIFRÕES, GOOGLE, MENSAGENS)
+        function startRain() {
+            const section = document.getElementById('section-chuva');
+            const simbolos = ['$', 'G', '💬', '💰'];
+            
+            setInterval(() => {
+                const drop = document.createElement('div');
+                drop.classList.add('chuva-item');
+                drop.innerText = simbolos[Math.floor(Math.random() * simbolos.length)];
+                
+                drop.style.left = Math.random() * 100 + "%";
+                drop.style.fontSize = (Math.random() * 20 + 15) + "px";
+                drop.style.animationDuration = (Math.random() * 2 + 3) + "s";
+                
+                section.appendChild(drop);
+                setTimeout(() => drop.remove(), 5000);
+            }, 200);
+        }
+        
+        startRain(); // Inicia a chuva automaticamente
     </script>
 
 </body>
